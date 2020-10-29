@@ -1,5 +1,7 @@
 package br.com.udemy.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.io.Serializable;
@@ -9,6 +11,7 @@ import java.util.Objects;
 public class ItemPedido implements Serializable {
     private static final long serialVersionUID = 4517837803275548193L;
 
+    @JsonIgnore
     @EmbeddedId
     private ItemPedidoPk id = new ItemPedidoPk();
 
@@ -28,6 +31,7 @@ public class ItemPedido implements Serializable {
         this.preco = preco;
     }
 
+    @JsonIgnore
     public Pedido getPedido(){
         return id.getPedido();
     }
