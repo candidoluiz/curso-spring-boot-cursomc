@@ -1,5 +1,6 @@
 package br.com.udemy.cursomc.resources;
 
+import br.com.udemy.cursomc.domain.Cliente;
 import br.com.udemy.cursomc.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +17,8 @@ public class ClienteResource {
     private ClienteService clienteService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Integer id){
+    public ResponseEntity<Cliente> find(@PathVariable Integer id){
         //Categoria obj = categoriaService.buscar(id);
-        return ResponseEntity.ok().body(clienteService.buscar(id));
+        return ResponseEntity.ok().body(clienteService.find(id));
     }
 }

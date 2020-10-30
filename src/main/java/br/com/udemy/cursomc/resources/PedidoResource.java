@@ -1,5 +1,6 @@
 package br.com.udemy.cursomc.resources;
 
+import br.com.udemy.cursomc.domain.Pedido;
 import br.com.udemy.cursomc.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +17,8 @@ public class PedidoResource {
     private PedidoService pedidoService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Integer id){
+    public ResponseEntity<Pedido> find(@PathVariable Integer id){
         //Pedido obj = pedidoService.buscar(id);
-        return ResponseEntity.ok().body(pedidoService.buscar(id));
+        return ResponseEntity.ok().body(pedidoService.find(id));
     }
 }
