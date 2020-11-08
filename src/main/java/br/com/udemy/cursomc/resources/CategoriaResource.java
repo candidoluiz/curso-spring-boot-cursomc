@@ -1,6 +1,7 @@
 package br.com.udemy.cursomc.resources;
 
 import br.com.udemy.cursomc.domain.Categoria;
+import br.com.udemy.cursomc.dto.CategoriaDTO;
 import br.com.udemy.cursomc.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -41,5 +44,12 @@ public class CategoriaResource {
     public ResponseEntity<Void> delete(@PathVariable Integer id){
         categoriaService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity< List<CategoriaDTO>> findAll(){
+        List<Categoria> categorias = categoriaService.findAll();
+        List<CategoriaDTO> categoriaDTOS = categorias.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(categoriaDTOS);
     }
 }
