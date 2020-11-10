@@ -1,6 +1,7 @@
 package br.com.udemy.cursomc.services;
 
 import br.com.udemy.cursomc.domain.Categoria;
+import br.com.udemy.cursomc.dto.CategoriaDTO;
 import br.com.udemy.cursomc.repositories.CategoriaRepository;
 import br.com.udemy.cursomc.services.exceptions.DataIntegrityException;
 import br.com.udemy.cursomc.services.exceptions.ObjectNotFoundException;
@@ -53,5 +54,9 @@ public class CategoriaService {
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page,linesPerPage,Sort.Direction.valueOf(direction),orderBy);
         return categoriaRepository.findAll(pageRequest);
+    }
+
+    public Categoria fromDto(CategoriaDTO categoriaDTO){
+        return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
     }
 }
